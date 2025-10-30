@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BiblioENSAMR — For Book Lovers</title>
-    <meta name="description" content="Discover, borrow and share books inside ENSAM Rabat — simple and trustworthy. Community platform for book lovers at Great Debaters ENSAM Rabat.">
+    <title>BiblioENSAMR â€” For Book Lovers</title>
+    <meta name="description" content="Discover, borrow and share books inside ENSAM Rabat â€” simple and trustworthy. Community platform for book lovers at Great Debaters ENSAM Rabat.">
     <meta name="author" content="Great Debaters ENSAM Rabat">
 
     <meta property="og:title" content="BiblioENSAMR - For Book Lovers">
@@ -18,18 +18,18 @@
 
     <!--
       What changed & why:
-      • Replaced cold blue palette with warm paper/ink/bronze tokens for vintage newspaper aesthetic
-      • Changed Cinzel to IM Fell English for authentic letterpress feel
-      • Redesigned header with dotted rules and small-caps navigation
-      • Converted section gradients to paper card containers with subtle texture overlay
-      • Added ornamental bronze rules (❧) to section titles
-      • Redesigned book cards with letterpress-style shadows on paper backgrounds
-      • Updated buttons to bronze outline with hover fill
-      • Added newspaper coupon-edge footer with dotted side rules
-      • Replaced emoji with inline SVG book icon in bronze
-      • Improved mobile card alignment with consistent grid heights
-      • Enhanced accessibility with proper focus states and reduced-motion support
-      • All images use loading="lazy" with explicit dimensions for zero CLS
+      â€¢ Replaced cold blue palette with warm paper/ink/bronze tokens for vintage newspaper aesthetic
+      â€¢ Changed Cinzel to IM Fell English for authentic letterpress feel
+      â€¢ Redesigned header with dotted rules and small-caps navigation
+      â€¢ Converted section gradients to paper card containers with subtle texture overlay
+      â€¢ Added ornamental bronze rules (â§) to section titles
+      â€¢ Redesigned book cards with letterpress-style shadows on paper backgrounds
+      â€¢ Updated buttons to bronze outline with hover fill
+      â€¢ Added newspaper coupon-edge footer with dotted side rules
+      â€¢ Replaced emoji with inline SVG book icon in bronze
+      â€¢ Improved mobile card alignment with consistent grid heights
+      â€¢ Enhanced accessibility with proper focus states and reduced-motion support
+      â€¢ All images use loading="lazy" with explicit dimensions for zero CLS
     -->
 
     <style>
@@ -331,7 +331,7 @@
         }
 
         .section-title::after {
-            content: '❧';
+            content: 'â§';
             position: absolute;
             bottom: -1.5rem;
             left: 50%;
@@ -672,8 +672,8 @@
     letter-spacing: .02em;
     line-height: 1.8;
     color: rgba(255,255,255,.92);
-    /* ruban allongé */
-    margin: 1rem -2rem 0;             /* déborde pour s'étirer visuellement */
+    /* ruban allongÃ© */
+    margin: 1rem -2rem 0;             /* dÃ©borde pour s'Ã©tirer visuellement */
     padding: 1.25rem 2.25rem 2.25rem;
     border-radius: 18px;
     background:
@@ -686,7 +686,7 @@
     text-align: center;
     }
 
-    /* grandes guillemets décoratives */
+    /* grandes guillemets dÃ©coratives */
     .footer-quote::before,
     .footer-quote::after{
     position: absolute;
@@ -696,15 +696,15 @@
     font-family: 'Cinzel', serif;
     }
     .footer-quote::before{
-    content: "«";
+    content: "Â«";
     left: 1rem; top: .75rem;
     }
     .footer-quote::after{
-    content: "»";
+    content: "Â»";
     right: 1rem; bottom: 1.75rem;
     }
 
-    /* longue ligne + fleuron centrés dessous */
+    /* longue ligne + fleuron centrÃ©s dessous */
     .footer-quote .ornament{
     position: relative;
     display: block;
@@ -719,7 +719,7 @@
         rgba(255,255,255,0) 100%);
     }
     .footer-quote .ornament::after{
-    content: "❧";
+    content: "â§";
     position: absolute; inset: 0;
     margin: auto; width: max-content; height: max-content;
     padding: 0 .35rem;
@@ -729,7 +729,7 @@
     transform: translateY(-.65rem);
     }
 
-    /* petite lettrine “ancienne” (sur la première lettre) */
+    /* petite lettrine â€œancienneâ€ (sur la premiÃ¨re lettre) */
     .footer-quote:first-letter{
     initial-letter: 2 1;      /* support moderne */
     -webkit-initial-letter: 2 1;
@@ -743,7 +743,7 @@
     }
     }
 
-    /* légère variante sur mobile : un peu moins large */
+    /* lÃ©gÃ¨re variante sur mobile : un peu moins large */
     @media (max-width: 768px){
     .footer-quote{ margin: .5rem -1rem 0; padding: 1rem 1.25rem 1.75rem; }
     
@@ -992,7 +992,7 @@
   color: var(--paper);
 }
 
-/* make the texture overlay way softer so it doesn’t look “paper white” */
+/* make the texture overlay way softer so it doesnâ€™t look â€œpaper whiteâ€ */
 .books-container::before{ opacity: .08; }
 
 /* arrows look like the screenshots (warm gold) */
@@ -1066,7 +1066,7 @@
   background: rgba(255,255,255,.12);
 }
 
-/* “Voir tout” tile should also be frameless */
+/* â€œVoir toutâ€ tile should also be frameless */
 .view-all-card{
   background: transparent;
   border: 1px dashed rgba(255,255,255,.18);
@@ -1080,7 +1080,7 @@
   border-color: rgba(255,255,255,.35);
 }
 
-/* Desktop titles sit over a darker container—slightly tighten spacing */
+/* Desktop titles sit over a darker containerâ€”slightly tighten spacing */
 .section-header{ margin-bottom: 1.25rem; }
 
 /* Keep mobile nice and compact */
@@ -1089,7 +1089,7 @@
   .book-card{ flex-basis: 150px; max-width: 150px; }
 }
 .mobile-menu nav{
-  margin-top: 1rem;   /* ajuste 0.5rem → 1rem selon ton goût */
+  margin-top: 1rem;   /* ajuste 0.5rem â†’ 1rem selon ton goÃ»t */
 }
 
 /* ===== LANDING PAGE STYLES (from original index.html) ===== */
@@ -1192,7 +1192,7 @@
 }
 
 .landing-hero-text h1::before {
-    content: 'DECLASSIFIÉ';
+    content: 'DECLASSIFIÃ‰';
     position: absolute;
     top: -1.5rem;
     right: -1rem;
@@ -1261,7 +1261,7 @@
 }
 
 .landing-hero-text .subtitle::after {
-    content: '• • •';
+    content: 'â€¢ â€¢ â€¢';
     display: block;
     margin-top: 0.75rem;
     letter-spacing: 0.5em;
@@ -2136,8 +2136,8 @@ body.no-scroll {
             <div class="unified-nav-center">
                 <ul class="unified-nav-menu">
                     <li><a href="index.html">Accueil</a></li>
-                    <li><a href="catalogue2.html" class="active">Bibliothèque</a></li>
-                    <li><a href="events.html">Événements</a></li>
+                    <li><a href="catalogue2.html" class="active">BibliothÃ¨que</a></li>
+                    <li><a href="events.html">Ã‰vÃ©nements</a></li>
                     <li><a href="podcasts.html">Podcasts</a></li>
                     <li><a href="journal.html">Journal</a></li>
                 </ul>
@@ -2162,11 +2162,11 @@ body.no-scroll {
 
     <!-- Mobile Menu -->
     <div class="unified-mobile-menu" id="unifiedMobileMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
-        <button class="unified-mobile-close" id="unifiedMobileClose" aria-label="Fermer le menu">×</button>
+        <button class="unified-mobile-close" id="unifiedMobileClose" aria-label="Fermer le menu">Ã—</button>
         <nav>
             <a href="index.html">Accueil</a>
-            <a href="catalogue2.html" class="active">Bibliothèque</a>
-            <a href="events.html">Événements</a>
+            <a href="catalogue2.html" class="active">BibliothÃ¨que</a>
+            <a href="events.html">Ã‰vÃ©nements</a>
             <a href="podcasts.html">Podcasts</a>
             <a href="journal.html">Journal</a>
         </nav>
@@ -2181,11 +2181,11 @@ body.no-scroll {
             <div class="landing-hero-content">
                 <div class="landing-hero-text">
                     <h1>For Book Lovers.</h1>
-                    <p class="lead">Discover, borrow and share books inside ENSAM Rabat — simple and trustworthy.</p>
-                    <p class="subtitle">Great Debaters • ENSAM Rabat</p>
+                    <p class="lead">Discover, borrow and share books inside ENSAM Rabat â€” simple and trustworthy.</p>
+                    <p class="subtitle">Great Debaters â€¢ ENSAM Rabat</p>
                     <div class="landing-hero-buttons">
-                        <a href="#catalogue-start" class="landing-btn landing-btn-primary">Start the journey →</a>
-                        <a href="share2.html" class="landing-btn landing-btn-outline">Dépose ton livre →</a>
+                        <a href="books.html" class="landing-btn landing-btn-primary">Start the journey â†’</a>
+                        <a href="share2.html" class="landing-btn landing-btn-outline">DÃ©pose ton livre â†’</a>
                     </div>
                 </div>
                 <div class="landing-hero-image">
@@ -2208,7 +2208,7 @@ body.no-scroll {
                 </div>
                 <div class="landing-help-text">
                     <h2>We're here to help.</h2>
-                    <p>Clean, readable and fast. From finding a title to asking for a loan — everything is clear and organized.</p>
+                    <p>Clean, readable and fast. From finding a title to asking for a loan â€” everything is clear and organized.</p>
                     <div class="landing-feature-pills">
                         <span class="landing-pill">Simple search</span>
                         <span class="landing-pill">Clear requests</span>
@@ -2219,399 +2219,7 @@ body.no-scroll {
             </div>
         </div>
     </section>
-
-    <section class="landing-journey-section">
-        <div class="landing-container">
-            <div class="landing-journey-content">
-                <div class="landing-journey-text">
-                    <h2>Start the journey.</h2>
-                    <p>Begin with the catalogue or deposit a book — it takes a minute.</p>
-                    <div class="landing-journey-buttons">
-                        <a href="#catalogue-start" class="landing-btn landing-btn-primary">Start now →</a>
-                        <a href="share2.html" class="landing-btn landing-btn-outline">Dépose un livre →</a>
-                    </div>
-                </div>
-                <div class="landing-journey-image">
-                    <img src="images/image2.png" alt="Study scene with notebook and coffee" width="600" height="450" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- END LANDING PAGE CONTENT -->
-
-    <div id="catalogue-start"></div>
-    <main class="main-content">
-        <section class="section" data-category="literature">
-            <div class="section-container">
-                <div class="section-header">
-                    <h2 class="section-title">Littérature Classique</h2>
-                </div>
-                <div class="books-container">
-                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
-                    <div class="books-scroll" role="list" tabindex="0">
-                        <div class="book-card" role="listitem" data-title="Les Misérables Victor Hugo" data-author="Victor Hugo">
-                            <img src="images/misérable.png" alt="Couverture des Misérables" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Les Misérables</h3>
-                                <p class="book-author">Victor Hugo</p>
-                                <p class="book-price">24.90 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Notre-Dame de Paris Victor Hugo" data-author="Victor Hugo">
-                            <img src="images/paris.png" alt="Couverture de Notre-Dame de Paris" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Notre-Dame de Paris</h3>
-                                <p class="book-author">Victor Hugo</p>
-                                <p class="book-price">22.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Madame Bovary Gustave Flaubert" data-author="Gustave Flaubert">
-                            <img src="images/livre.png" alt="Couverture de Madame Bovary" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Madame Bovary</h3>
-                                <p class="book-author">Gustave Flaubert</p>
-                                <p class="book-price">19.90 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Le Père Goriot Honoré de Balzac" data-author="Honoré de Balzac">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture du Père Goriot" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Le Père Goriot</h3>
-                                <p class="book-author">Honoré de Balzac</p>
-                                <p class="book-price">21.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="L'Étranger Albert Camus" data-author="Albert Camus">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de L'Étranger" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">L'Étranger</h3>
-                                <p class="book-author">Albert Camus</p>
-                                <p class="book-price">18.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="La Peste Albert Camus" data-author="Albert Camus">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de La Peste" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">La Peste</h3>
-                                <p class="book-author">Albert Camus</p>
-                                <p class="book-price">20.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <a href="#" class="view-all-card" role="listitem">
-                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
-                                <use href="#icon-book" fill="var(--bronze)"/>
-                            </svg>
-                            <div class="view-all-text">Voir Tout</div>
-                        </a>
-                    </div>
-                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" data-category="romans">
-            <div class="section-container">
-                <div class="section-header">
-                    <h2 class="section-title">Romans Contemporains</h2>
-                </div>
-                <div class="books-container">
-                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
-                    <div class="books-scroll" role="list" tabindex="0">
-                        <div class="book-card" role="listitem" data-title="L'Art de perdre Alice Zeniter" data-author="Alice Zeniter">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de L'Art de perdre" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">L'Art de perdre</h3>
-                                <p class="book-author">Alice Zeniter</p>
-                                <p class="book-price">23.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Vernon Subutex Virginie Despentes" data-author="Virginie Despentes">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Vernon Subutex" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Vernon Subutex</h3>
-                                <p class="book-author">Virginie Despentes</p>
-                                <p class="book-price">25.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Changer l'eau des fleurs Valérie Perrin" data-author="Valérie Perrin">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de Changer l'eau des fleurs" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Changer l'eau des fleurs</h3>
-                                <p class="book-author">Valérie Perrin</p>
-                                <p class="book-price">22.90 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="L'Anomalie Hervé Le Tellier" data-author="Hervé Le Tellier">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de L'Anomalie" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">L'Anomalie</h3>
-                                <p class="book-author">Hervé Le Tellier</p>
-                                <p class="book-price">21.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Civilizations Laurent Binet" data-author="Laurent Binet">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de Civilizations" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Civilizations</h3>
-                                <p class="book-author">Laurent Binet</p>
-                                <p class="book-price">24.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Yoga Emmanuel Carrère" data-author="Emmanuel Carrère">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Yoga" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Yoga</h3>
-                                <p class="book-author">Emmanuel Carrère</p>
-                                <p class="book-price">23.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <a href="#" class="view-all-card" role="listitem">
-                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
-                                <use href="#icon-book" fill="var(--bronze)"/>
-                            </svg>
-                            <div class="view-all-text">Voir Tout</div>
-                        </a>
-                    </div>
-                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" data-category="sciences">
-            <div class="section-container">
-                <div class="section-header">
-                    <h2 class="section-title">Sciences & Philosophie</h2>
-                </div>
-                <div class="books-container">
-                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
-                    <div class="books-scroll" role="list" tabindex="0">
-                        <div class="book-card" role="listitem" data-title="Sapiens Yuval Noah Harari" data-author="Yuval Noah Harari">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de Sapiens" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Sapiens</h3>
-                                <p class="book-author">Yuval Noah Harari</p>
-                                <p class="book-price">26.90 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Homo Deus Yuval Noah Harari" data-author="Yuval Noah Harari">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Homo Deus" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Homo Deus</h3>
-                                <p class="book-author">Yuval Noah Harari</p>
-                                <p class="book-price">25.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Le Gène Siddhartha Mukherjee" data-author="Siddhartha Mukherjee">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture du Gène" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Le Gène</h3>
-                                <p class="book-author">Siddhartha Mukherjee</p>
-                                <p class="book-price">28.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="L'Être et le Temps Martin Heidegger" data-author="Martin Heidegger">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de L'Être et le Temps" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">L'Être et le Temps</h3>
-                                <p class="book-author">Martin Heidegger</p>
-                                <p class="book-price">32.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Critique de la raison pure Emmanuel Kant" data-author="Emmanuel Kant">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de Critique de la raison pure" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Critique de la raison pure</h3>
-                                <p class="book-author">Emmanuel Kant</p>
-                                <p class="book-price">29.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Une brève histoire du temps Stephen Hawking" data-author="Stephen Hawking">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture d'Une brève histoire du temps" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Une brève histoire du temps</h3>
-                                <p class="book-author">Stephen Hawking</p>
-                                <p class="book-price">24.90 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <a href="#" class="view-all-card" role="listitem">
-                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
-                                <use href="#icon-book" fill="var(--bronze)"/>
-                            </svg>
-                            <div class="view-all-text">Voir Tout</div>
-                        </a>
-                    </div>
-                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" data-category="histoire">
-            <div class="section-container">
-                <div class="section-header">
-                    <h2 class="section-title">Histoire & Biographies</h2>
-                </div>
-                <div class="books-container">
-                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
-                    <div class="books-scroll" role="list" tabindex="0">
-                        <div class="book-card" role="listitem" data-title="Les Rois maudits Maurice Druon" data-author="Maurice Druon">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture des Rois maudits" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Les Rois maudits</h3>
-                                <p class="book-author">Maurice Druon</p>
-                                <p class="book-price">27.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Mémoires de guerre Charles de Gaulle" data-author="Charles de Gaulle">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Mémoires de guerre" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Mémoires de guerre</h3>
-                                <p class="book-author">Charles de Gaulle</p>
-                                <p class="book-price">31.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="L'Histoire de France Ernest Lavisse" data-author="Ernest Lavisse">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de L'Histoire de France" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">L'Histoire de France</h3>
-                                <p class="book-author">Ernest Lavisse</p>
-                                <p class="book-price">35.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Napoléon Jean Tulard" data-author="Jean Tulard">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Napoléon" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Napoléon</h3>
-                                <p class="book-author">Jean Tulard</p>
-                                <p class="book-price">26.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Le Siècle des Lumières Voltaire" data-author="Voltaire">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture du Siècle des Lumières" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Le Siècle des Lumières</h3>
-                                <p class="book-author">Voltaire</p>
-                                <p class="book-price">23.90 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Marie-Antoinette Stefan Zweig" data-author="Stefan Zweig">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Marie-Antoinette" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Marie-Antoinette</h3>
-                                <p class="book-author">Stefan Zweig</p>
-                                <p class="book-price">22.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <a href="#" class="view-all-card" role="listitem">
-                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
-                                <use href="#icon-book" fill="var(--bronze)"/>
-                            </svg>
-                            <div class="view-all-text">Voir Tout</div>
-                        </a>
-                    </div>
-                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" data-category="premium">
-            <div class="section-container">
-                <div class="section-header">
-                    <h2 class="section-title">Livres Premium</h2>
-                </div>
-                <div class="books-container">
-                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
-                    <div class="books-scroll" role="list" tabindex="0">
-                        <div class="book-card" role="listitem" data-title="Éditions Originales Collection" data-author="Éditions Rares">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture d'édition originale" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Éditions Originales</h3>
-                                <p class="book-author">Collection Rare</p>
-                                <p class="book-price">120.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Manuscrits Anciens Collection" data-author="Bibliothèque Nationale">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de manuscrit ancien" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Manuscrits Anciens</h3>
-                                <p class="book-author">Bibliothèque Nationale</p>
-                                <p class="book-price">89.90 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Œuvres Complètes Proust" data-author="Marcel Proust">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture des œuvres complètes de Proust" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Œuvres Complètes</h3>
-                                <p class="book-author">Marcel Proust</p>
-                                <p class="book-price">75.50 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Collection Shakespeare" data-author="William Shakespeare">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de la collection Shakespeare" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Collection Shakespeare</h3>
-                                <p class="book-author">William Shakespeare</p>
-                                <p class="book-price">95.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Encyclopédie Diderot" data-author="Denis Diderot">
-                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de l'Encyclopédie de Diderot" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Encyclopédie Diderot</h3>
-                                <p class="book-author">Denis Diderot</p>
-                                <p class="book-price">150.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <div class="book-card" role="listitem" data-title="Grands Atlas Historiques" data-author="Éditions Cartographiques">
-                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture d'atlas historique" class="book-cover" loading="lazy" width="220" height="293">
-                            <div class="book-info">
-                                <h3 class="book-title">Grands Atlas Historiques</h3>
-                                <p class="book-author">Éditions Cartographiques</p>
-                                <p class="book-price">110.00 €</p>
-                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
-                            </div>
-                        </div>
-                        <a href="#" class="view-all-card" role="listitem">
-                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
-                                <use href="#icon-book" fill="var(--bronze)"/>
-                            </svg>
-                            <div class="view-all-text">Voir Tout</div>
-                        </a>
-                    </div>
-                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
-                </div>
-            </div>
-        </section>
-    </main>
 
     <!-- UNIFIED FOOTER -->
     <footer class="unified-footer">
@@ -2649,8 +2257,8 @@ body.no-scroll {
                     <h3>Navigation</h3>
                     <ul>
                         <li><a href="index.html">Accueil</a></li>
-                        <li><a href="catalogue2.html">Bibliothèque</a></li>
-                        <li><a href="events.html">Événements</a></li>
+                        <li><a href="catalogue2.html">BibliothÃ¨que</a></li>
+                        <li><a href="events.html">Ã‰vÃ©nements</a></li>
                         <li><a href="podcasts.html">Podcasts</a></li>
                         <li><a href="journal.html">Journal</a></li>
                     </ul>
@@ -2660,9 +2268,9 @@ body.no-scroll {
                 <div class="footer-column">
                     <h3>Ressources</h3>
                     <ul>
-                        <li><a href="share2.html">Déposer un livre</a></li>
+                        <li><a href="share2.html">DÃ©poser un livre</a></li>
                         <li><a href="form.html">Emprunter un livre</a></li>
-                        <li><a href="index.html#qui-nous-sommes">À propos de GDE</a></li>
+                        <li><a href="index.html#qui-nous-sommes">Ã€ propos de GDE</a></li>
                         <li><a href="index.html#nos-valeurs">Nos valeurs</a></li>
                         <li><a href="index.html#rejoindre">Nous rejoindre</a></li>
                     </ul>
@@ -2674,7 +2282,7 @@ body.no-scroll {
                     <ul>
                         <li><a href="mailto:gde.ensamrabat@gmail.com">gde.ensamrabat@gmail.com</a></li>
                         <li><a href="tel:+212000000000">+212 (0)6 00 00 00 00</a></li>
-                        <li>ENSAM Rabat<br>Avenue de l'Armée Royale<br>Rabat, Maroc</li>
+                        <li>ENSAM Rabat<br>Avenue de l'ArmÃ©e Royale<br>Rabat, Maroc</li>
                     </ul>
                 </div>
             </div>
@@ -2682,9 +2290,9 @@ body.no-scroll {
             <div class="footer-divider"></div>
 
             <div class="footer-bottom">
-                <div>© <span id="year"></span> GDE ENSAMR — Tous droits réservés.</div>
+                <div>Â© <span id="year"></span> GDE ENSAMR â€” Tous droits rÃ©servÃ©s.</div>
                 <div class="footer-bottom-links">
-                    <a href="privacy.html">Politique de confidentialité</a>
+                    <a href="privacy.html">Politique de confidentialitÃ©</a>
                     <a href="terms.html">Conditions d'utilisation</a>
                     <a href="sitemap.html">Plan du site</a>
                 </div>
@@ -2704,7 +2312,7 @@ body.no-scroll {
             </div>
             <nav class="footer-nav" aria-label="Liens de bas de page">
                 <a href="index.html">About GDE</a>
-                <a href="catalogue2.html">Bibliothèque</a>
+                <a href="catalogue2.html">BibliothÃ¨que</a>
                 <a href="contact.html">Contact us</a>
                 <a href="license.html">License</a>
             </nav>
@@ -2714,7 +2322,7 @@ body.no-scroll {
                 <span class="ornament" aria-hidden="true"></span>
             </p>
             <div class="footer-meta">
-                <span id="copyright">© <span id="year"></span> BiblioENSAMR — Tous droits réservés.</span>
+                <span id="copyright">Â© <span id="year"></span> BiblioENSAMR â€” Tous droits rÃ©servÃ©s.</span>
             </div>
         </div>
     </footer>
@@ -2874,7 +2482,7 @@ body.no-scroll {
             document.querySelectorAll('.borrow-btn').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     const originalText = this.textContent;
-                    this.textContent = 'Emprunté ✓';
+                    this.textContent = 'EmpruntÃ© âœ“';
                     this.style.background = 'var(--bronze)';
                     this.style.color = 'var(--bg-dark)';
                     this.disabled = true;
