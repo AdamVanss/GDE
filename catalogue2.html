@@ -1,0 +1,2906 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioENSAMR — For Book Lovers</title>
+    <meta name="description" content="Discover, borrow and share books inside ENSAM Rabat — simple and trustworthy. Community platform for book lovers at Great Debaters ENSAM Rabat.">
+    <meta name="author" content="Great Debaters ENSAM Rabat">
+
+    <meta property="og:title" content="BiblioENSAMR - For Book Lovers">
+    <meta property="og:description" content="Discover, borrow and share books inside ENSAM Rabat - simple and trustworthy.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://biblioensamr.ma">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!--
+      What changed & why:
+      • Replaced cold blue palette with warm paper/ink/bronze tokens for vintage newspaper aesthetic
+      • Changed Cinzel to IM Fell English for authentic letterpress feel
+      • Redesigned header with dotted rules and small-caps navigation
+      • Converted section gradients to paper card containers with subtle texture overlay
+      • Added ornamental bronze rules (❧) to section titles
+      • Redesigned book cards with letterpress-style shadows on paper backgrounds
+      • Updated buttons to bronze outline with hover fill
+      • Added newspaper coupon-edge footer with dotted side rules
+      • Replaced emoji with inline SVG book icon in bronze
+      • Improved mobile card alignment with consistent grid heights
+      • Enhanced accessibility with proper focus states and reduced-motion support
+      • All images use loading="lazy" with explicit dimensions for zero CLS
+    -->
+
+    <style>
+        :root {
+            --bg-dark: #0f0e0d;
+            --panel: #1a1816;
+            --paper: #f2efe9;
+            --ink: #2a2723;
+            --ink-soft: #bfbab2;
+            --bronze: #b08b5b;
+            --stroke: #3a2f23;
+            --radius: 16px;
+            --shadow: 0 10px 30px rgba(0,0,0,.28);
+            --transition: all .22s cubic-bezier(.4,0,.2,1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--paper);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header - Newspaper Masthead */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--bg-dark);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px dotted var(--stroke);
+            padding: 1.25rem 0;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .header-title {
+            font-family: 'IM Fell English', serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--paper);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            white-space: nowrap;
+        }
+
+        /* Search Container */
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+            max-width: 400px;
+            order: 3;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            border: 1px solid var(--stroke);
+            border-radius: 25px;
+            background: var(--panel);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            color: var(--paper);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--bronze);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 0 0 3px rgba(176, 139, 91, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--ink-soft);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Navigation - Small Caps */
+        nav.desktop {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--paper);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--bronze);
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--bronze);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--paper);
+            margin: 4px 0;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -5px);
+        }
+
+        /* Mobile Menu - Paper Texture */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 320px;
+            height: 100vh;
+            background: var(--paper);
+            z-index: 999;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 5rem 2rem 2rem;
+            border-left: 3px solid var(--bronze);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            flex: 1;
+        }
+
+        .mobile-menu nav a {
+            color: var(--ink);
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(42, 39, 35, 0.15);
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.9rem;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-menu nav a:hover {
+            color: var(--bronze);
+            padding-left: 0.5rem;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: transparent;
+            color: var(--ink);
+            font-size: 32px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        /* Backdrop */
+        .backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 998;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-bottom: 0;
+        }
+
+        .section {
+            position: relative;
+            padding: 3rem 0;
+            background: var(--bg-dark);
+        }
+
+        .section:last-of-type {
+            padding-bottom: 1.5rem;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+
+        .section-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'IM Fell English', serif;
+            font-size: clamp(1.75rem, 5vw, 2.25rem);
+            font-weight: 400;
+            color: var(--paper);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: clamp(1.5rem, 4vw, 1.9rem);
+        }
+
+        .section-title::after {
+            content: '❧';
+            position: absolute;
+            bottom: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--bronze);
+            font-size: 1rem;
+            width: 80px;
+            text-align: center;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -1.2rem;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--bronze);
+        }
+
+        /* Books Container - Paper Card */
+        .books-container {
+            position: relative;
+            margin-top: 3rem;
+            background: var(--paper);
+            color: var(--ink);
+            border: 1px solid color-mix(in srgb, var(--stroke) 70%, white);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .books-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        .scroll-nav {
+            display: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: var(--bronze);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: var(--bg-dark);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .scroll-nav:hover:not(:disabled) {
+            background: color-mix(in srgb, var(--bronze) 92%, white);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .scroll-nav:active:not(:disabled) {
+            background: color-mix(in srgb, var(--bronze) 85%, black);
+        }
+
+        .scroll-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .scroll-nav.prev {
+            left: -22px;
+        }
+
+        .scroll-nav.next {
+            right: -22px;
+        }
+
+        .books-scroll {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 1rem 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            overflow-y: visible;
+        }
+
+        .books-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Book Cards - Letterpress Style */
+        .book-card {
+            flex: 0 0 clamp(160px, 18vw, 220px);
+            max-width: clamp(160px, 18vw, 220px);
+            background: var(--paper);
+            border-radius: 12px;
+            padding: 0;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(42, 39, 35, 0.12);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+
+        .book-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+
+        .book-cover {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .book-card:hover .book-cover {
+            transform: scale(1.02);
+        }
+
+        .book-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0 1rem 1rem;
+            color: var(--ink);
+        }
+
+        .book-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.3;
+        }
+
+        .book-author {
+            color: var(--ink-soft);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+
+        .book-price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 1rem;
+        }
+
+        .borrow-btn {
+            width: 100%;
+            min-height: 44px;
+            border-radius: 8px;
+            border: 1px solid var(--stroke);
+            background: transparent;
+            color: var(--ink);
+            font-weight: 500;
+            transition: var(--transition);
+            margin-top: auto;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .borrow-btn:hover {
+            background: var(--bronze);
+            border-color: var(--bronze);
+            color: var(--bg-dark);
+        }
+
+        .borrow-btn:focus-visible {
+            outline: 2px solid var(--bronze);
+            outline-offset: 2px;
+        }
+
+        /* View All Card */
+        .view-all-card {
+            flex: 0 0 clamp(160px, 18vw, 220px);
+            max-width: clamp(160px, 18vw, 220px);
+            min-height: 320px;
+            background: var(--paper);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--ink);
+            transition: var(--transition);
+            border: 1px solid rgba(42, 39, 35, 0.12);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255,255,255,0.5);
+            padding: 1rem;
+        }
+
+        .view-all-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.5);
+            background: color-mix(in srgb, var(--paper) 95%, var(--bronze));
+        }
+
+        .view-all-icon {
+            margin-bottom: 1rem;
+        }
+
+        .view-all-text {
+            font-family: 'IM Fell English', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--bronze);
+        }
+
+        /* Footer - Newspaper Coupon Edge */
+        .site-footer {
+            background: var(--panel);
+            color: var(--paper);
+            padding: 3rem 0 2rem;
+            margin-top: 0;
+            position: relative;
+        }
+
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(135deg, var(--bronze) 25%, transparent 25%),
+                        linear-gradient(-135deg, var(--bronze) 25%, transparent 25%);
+            background-size: 16px 8px;
+            background-position: 0 0, 8px 0;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .site-footer .logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            background: var(--bronze);
+            color: var(--bg-dark);
+            font-weight: 700;
+            font-size: 1.25rem;
+            font-family: 'IM Fell English', serif;
+        }
+
+        .brand-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .brand-tagline {
+            color: var(--ink-soft);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .footer-nav::before,
+        .footer-nav::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: repeating-linear-gradient(90deg, var(--stroke) 0, var(--stroke) 4px, transparent 4px, transparent 8px);
+        }
+
+        .footer-nav::before {
+            margin-right: 1rem;
+        }
+
+        .footer-nav::after {
+            margin-left: 1rem;
+        }
+
+        .footer-nav a {
+            color: var(--paper);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .footer-nav a:hover {
+            color: var(--bronze);
+        }
+
+        .footer-quote{
+    position: relative;
+    font-family: 'Cinzel', serif;     /* look classique */
+    font-style: normal;
+    letter-spacing: .02em;
+    line-height: 1.8;
+    color: rgba(255,255,255,.92);
+    /* ruban allongé */
+    margin: 1rem -2rem 0;             /* déborde pour s'étirer visuellement */
+    padding: 1.25rem 2.25rem 2.25rem;
+    border-radius: 18px;
+    background:
+        radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,.05), rgba(255,255,255,0) 70%) ,
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.10);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 8px 24px rgba(0,0,0,.25);
+    text-align: center;
+    }
+
+    /* grandes guillemets décoratives */
+    .footer-quote::before,
+    .footer-quote::after{
+    position: absolute;
+    font-size: 2.25rem;
+    line-height: 1;
+    color: rgba(255,255,255,.25);
+    font-family: 'Cinzel', serif;
+    }
+    .footer-quote::before{
+    content: "«";
+    left: 1rem; top: .75rem;
+    }
+    .footer-quote::after{
+    content: "»";
+    right: 1rem; bottom: 1.75rem;
+    }
+
+    /* longue ligne + fleuron centrés dessous */
+    .footer-quote .ornament{
+    position: relative;
+    display: block;
+    margin: .85rem auto 0;
+    width: min(520px, 80%);
+    height: 1px;
+    background: linear-gradient(90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,.35) 15%,
+        rgba(255,255,255,.5) 50%,
+        rgba(255,255,255,.35) 85%,
+        rgba(255,255,255,0) 100%);
+    }
+    .footer-quote .ornament::after{
+    content: "❧";
+    position: absolute; inset: 0;
+    margin: auto; width: max-content; height: max-content;
+    padding: 0 .35rem;
+    background: transparent;
+    color: var(--bronze);
+    font-size: 1rem;
+    transform: translateY(-.65rem);
+    }
+
+    /* petite lettrine “ancienne” (sur la première lettre) */
+    .footer-quote:first-letter{
+    initial-letter: 2 1;      /* support moderne */
+    -webkit-initial-letter: 2 1;
+    margin-right: .25rem;
+    color: var(--bronze);
+    }
+    @supports not (initial-letter: 2 1){
+    .footer-quote:first-letter{
+        float: left; font-size: 1.8em; line-height: 1;
+        padding-right: .35rem; color: var(--bronze);
+    }
+    }
+
+    /* légère variante sur mobile : un peu moins large */
+    @media (max-width: 768px){
+    .footer-quote{ margin: .5rem -1rem 0; padding: 1rem 1.25rem 1.75rem; }
+    
+    }
+        .footer-meta{
+    display:flex; justify-content: space-between; align-items:center;
+    gap: 1rem; color: rgba(255,255,255,.65);
+    font-size: .9rem;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding-top: 1rem;
+    }
+
+        /* Responsive Design */
+        @media (min-width: 769px) {
+            .scroll-nav {
+                display: block;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr auto;
+                grid-template-areas:
+                    "brand nav"
+                    "quote quote"
+                    "meta meta";
+            }
+
+            .footer-brand {
+                grid-area: brand;
+            }
+
+            .footer-nav {
+                grid-area: nav;
+                align-self: center;
+            }
+
+            .footer-quote {
+                grid-area: quote;
+            }
+
+            .footer-meta {
+                grid-area: meta;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .search-container {
+                flex-basis: 100%;
+                max-width: 100%;
+                order: 3;
+            }
+
+            .menu-toggle {
+                display: block;
+                order: 2;
+            }
+
+            nav.desktop {
+                display: none;
+            }
+
+            .section {
+                padding: 2rem 0;
+            }
+
+            .section-container {
+                padding: 0 1rem;
+            }
+
+            .books-container {
+                padding: 1rem;
+                gap: 0.75rem;
+                align-items: flex-start;
+                
+            }
+
+            .books-scroll {
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 1rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .book-card,
+            .view-all-card {
+                flex: 0 0 140px;
+                max-width: 140px;
+                scroll-snap-align: start;
+            }
+
+            .book-card {
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .book-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .book-cover {
+                border-radius: 6px;
+                margin: 0 0 0.5rem 0;
+            }
+
+            .book-info {
+                display: grid;
+                grid-template-rows: auto minmax(1rem, auto) 1.25rem 44px;
+                gap: 6px;
+                min-height: 9.5rem;
+                padding: 0;
+            }
+
+            .book-title {
+                font-size: 0.95rem;
+                line-height: 1.35;
+                min-height: calc(0.95rem * 1.35 * 2);
+                margin: 0;
+            }
+
+            .book-author {
+                font-size: 0.8rem;
+                min-height: 1rem;
+                margin: 0;
+            }
+
+            .book-price {
+                font-size: 0.95rem;
+                height: 1.25rem;
+                margin: 0;
+                display: flex;
+                align-items: center;
+            }
+
+            .borrow-btn {
+                border: 1px solid rgba(42, 39, 35, 0.25);
+                background: transparent;
+                margin-top: 0;
+            }
+
+            .view-all-card {
+                background: transparent;
+                border: none;
+                box-shadow: none;
+            }
+
+            .footer-quote {
+                padding: 1.5rem 2rem 2rem;
+                font-size: 1rem;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-nav::before,
+            .footer-nav::after {
+                display: none;
+            }
+
+            .footer-meta {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .section-container {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        *:focus-visible {
+            outline: 2px solid var(--bronze);
+            outline-offset: 2px;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* SVG Icons */
+        .u-visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+
+/* === Screenshot look: dark smoked container + frameless items === */
+:root{
+  /* warmer gold like the arrows in your screenshots */
+  --gold: #c9a36b;
+}
+
+/* Container: dark, soft gradient, subtle inner glow */
+.books-container{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)) ,
+    radial-gradient(120% 160% at 50% 0%, rgba(255,255,255,.06), transparent 60%) ,
+    #3b3835; /* base */
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(2px);
+  padding: 1.25rem 1.25rem 1.5rem;
+  border-radius: 24px;
+  color: var(--paper);
+}
+
+/* make the texture overlay way softer so it doesn’t look “paper white” */
+.books-container::before{ opacity: .08; }
+
+/* arrows look like the screenshots (warm gold) */
+.scroll-nav{
+  background: var(--gold);
+  color: #1a1816;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.scroll-nav:hover{ background: color-mix(in srgb, var(--gold) 95%, white); }
+
+/* Horizontal list spacing like the screenshots */
+.books-scroll{
+  gap: 2rem;
+  padding: .75rem .25rem 0;
+}
+
+/* ---- Frameless item design (no cards) ---- */
+.book-card{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  flex: 0 0 clamp(180px, 18vw, 260px);
+  max-width: clamp(180px, 18vw, 260px);
+  transition: transform .22s cubic-bezier(.4,0,.2,1);
+}
+.book-card:hover{ transform: translateY(-4px); }
+
+/* Image: big rounded corners + soft drop shadow - REMOVED DUPLICATE */
+/* .book-cover styles are defined earlier in the stylesheet */
+
+/* Text styles to match the vibe in the screenshots - padding moved to main definition */
+/* .book-info{ padding: 0; color: var(--paper); } */
+.book-title{
+  font-family: 'IM Fell English', serif;   /* same family as headings */
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: #f4efe8;
+  margin: 0 0 .35rem 0;
+  line-height: 1.25;
+  display: -webkit-box; -line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.book-author{
+  color: rgba(255,255,255,.65);
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin: 0 0 .6rem 0;
+}
+.book-price{
+  color: #f4efe8;
+  opacity: .9;
+  font-weight: 600;
+  margin: 0 0 .9rem 0;
+}
+
+/* Pill outline buttons like in the screenshot row */
+.borrow-btn{
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.28);
+  color: #f4efe8;
+  min-height: 44px;
+  font-weight: 500;
+}
+.borrow-btn:hover{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.55);
+}
+.borrow-btn:active{
+  background: rgba(255,255,255,.12);
+}
+
+/* “Voir tout” tile should also be frameless */
+.view-all-card{
+  background: transparent;
+  border: 1px dashed rgba(255,255,255,.18);
+  box-shadow: none;
+  border-radius: 18px;
+  color: #f4efe8;
+}
+.view-all-card:hover{
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.35);
+}
+
+/* Desktop titles sit over a darker container—slightly tighten spacing */
+.section-header{ margin-bottom: 1.25rem; }
+
+/* Keep mobile nice and compact */
+@media (max-width: 768px){
+  .books-scroll{ gap: 1.25rem; }
+  .book-card{ flex-basis: 150px; max-width: 150px; }
+}
+.mobile-menu nav{
+  margin-top: 1rem;   /* ajuste 0.5rem → 1rem selon ton goût */
+}
+
+/* ===== LANDING PAGE STYLES (from original index.html) ===== */
+.landing-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 5rem 0 2rem;
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .landing-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.015"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /></filter><rect width="100" height="100" filter="url(%23noise)" /></svg>'),
+            repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 1.65rem,
+                rgba(42, 39, 35, 0.025) 1.65rem,
+                rgba(42, 39, 35, 0.025) calc(1.65rem + 1px)
+            ),
+            linear-gradient(
+                90deg,
+                var(--paper) 0%,
+                var(--paper) 48%,
+                var(--bg-dark) 48%,
+                var(--panel) 100%
+            );
+        z-index: 1;
+    }
+
+    .landing-hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(15, 14, 13, 0.75) 0%,
+            rgba(15, 14, 13, 0.25) 40%,
+            rgba(15, 14, 13, 0.5) 100%
+        );
+        z-index: 2;
+    }
+}
+
+@media (min-width: 768px) {
+    .landing-hero {
+        background:
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.02"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /></filter><rect width="100" height="100" filter="url(%23noise)" /></svg>'),
+            var(--bg-dark);
+        padding: 6rem 0 3rem;
+    }
+}
+
+.landing-hero-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+    .landing-hero-content {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 4rem;
+        text-align: left;
+        align-items: center;
+    }
+}
+
+.landing-hero-text {
+    color: var(--paper);
+    position: relative;
+}
+
+.landing-hero-text h1 {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    position: relative;
+    display: inline-block;
+    font-size: clamp(2.25rem, 7vw, 3.5rem);
+    margin-bottom: 0.875rem;
+    line-height: 1.15;
+}
+
+.landing-hero-text h1::before {
+    content: 'DECLASSIFIÉ';
+    position: absolute;
+    top: -1.5rem;
+    right: -1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--bronze);
+    border: 2px solid var(--bronze);
+    padding: 0.25rem 0.5rem;
+    transform: rotate(12deg);
+    opacity: 0.8;
+    text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+    .landing-hero-text h1::before {
+        top: -0.5rem;
+        right: -3rem;
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+    }
+}
+
+.landing-hero-text h1:hover::before {
+    animation: stamp-press 0.6s ease;
+}
+
+@keyframes stamp-press {
+    0%, 100% { transform: rotate(12deg) scale(1); }
+    50% { transform: rotate(12deg) scale(1.1); box-shadow: 0 4px 12px rgba(176, 139, 91, 0.4); }
+}
+
+.landing-hero-text .lead {
+    font-size: clamp(1rem, 2.5vw, 1.1875rem);
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    line-height: 1.65;
+    font-family: 'Old Standard TT', serif;
+}
+
+.landing-hero-text .lead::first-letter {
+    font-size: 3.5em;
+    line-height: 0.85;
+    float: left;
+    margin: 0.05em 0.1em 0 0;
+    font-family: 'IM Fell English', serif;
+    color: var(--bronze);
+}
+
+.landing-hero-text .subtitle {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+    opacity: 0.85;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .landing-hero-text .subtitle {
+        text-align: left;
+    }
+}
+
+.landing-hero-text .subtitle::after {
+    content: '• • •';
+    display: block;
+    margin-top: 0.75rem;
+    letter-spacing: 0.5em;
+    opacity: 0.5;
+}
+
+.landing-hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .landing-hero-buttons {
+        flex-direction: row;
+        max-width: none;
+        margin: 0;
+    }
+}
+
+.landing-hero-image {
+    max-width: 130%;
+    width: 90%;
+    margin: 0 auto;
+    aspect-ratio: 4/3;
+}
+
+@media (min-width: 768px) {
+    .landing-hero-image {
+        width: 100%;
+        perspective: 1200px;
+    }
+}
+
+.landing-hero-image picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.landing-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow:
+        0 1px 0 0 rgba(255, 255, 255, 0.4) inset,
+        0 20px 50px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 8px solid rgba(242, 239, 233, 0.95);
+    transform: rotate(-1.5deg);
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .landing-hero-image img {
+        transform: rotate(-2deg);
+        border-width: 16px;
+    }
+
+    .landing-hero-image img:hover {
+        transform: rotate(0deg) translateZ(20px);
+    }
+}
+
+.landing-help-section {
+    background: var(--paper);
+    color: var(--ink);
+    padding: 6rem 0;
+    position: relative;
+    margin-top: -1px;
+}
+
+.landing-help-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.015"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /></filter><rect width="100" height="100" filter="url(%23noise)" /></svg>'),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 1.65rem,
+            rgba(42, 39, 35, 0.02) 1.65rem,
+            rgba(42, 39, 35, 0.02) calc(1.65rem + 1px)
+        );
+    pointer-events: none;
+}
+
+.landing-help-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+@media (min-width: 768px) {
+    .landing-help-content {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 5rem;
+    }
+}
+
+.landing-phone-mock {
+    order: 1;
+}
+
+.landing-phone-frame {
+    width: min(300px, 90%);
+    margin: 0 auto;
+    padding: 12px;
+    background: linear-gradient(135deg, #1a1816 0%, #000 100%);
+    border-radius: 40px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.landing-phone-frame::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    background: var(--paper);
+    border-radius: 48px;
+    z-index: -1;
+    clip-path: polygon(
+        0% 2%, 3% 0%, 5% 1%, 8% 0%, 12% 2%, 15% 1%, 18% 0%, 22% 1%,
+        25% 0%, 28% 2%, 32% 1%, 35% 0%, 38% 1%, 42% 0%, 45% 2%,
+        48% 1%, 52% 0%, 55% 1%, 58% 0%, 62% 2%, 65% 1%, 68% 0%,
+        72% 1%, 75% 0%, 78% 2%, 82% 1%, 85% 0%, 88% 1%, 92% 0%,
+        95% 2%, 97% 1%, 100% 0%, 100% 100%, 97% 99%, 95% 98%, 92% 100%,
+        88% 99%, 85% 100%, 82% 99%, 78% 98%, 75% 100%, 72% 99%, 68% 100%,
+        65% 99%, 62% 98%, 58% 100%, 55% 99%, 52% 100%, 48% 99%, 45% 98%,
+        42% 100%, 38% 99%, 35% 100%, 32% 99%, 28% 98%, 25% 100%, 22% 99%,
+        18% 100%, 15% 99%, 12% 98%, 8% 100%, 5% 99%, 3% 100%, 0% 98%
+    );
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.landing-phone-frame img {
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+    display: block;
+}
+
+.landing-help-text {
+    order: 2;
+}
+
+.landing-help-text h2 {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    margin-bottom: 1.125rem;
+    letter-spacing: -0.01em;
+}
+
+.landing-help-text p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    color: var(--ink);
+    line-height: 1.75;
+    font-family: 'Old Standard TT', serif;
+}
+
+.landing-help-text p::first-letter {
+    font-size: 3.2em;
+    line-height: 0.85;
+    float: left;
+    margin: 0.05em 0.08em 0 0;
+    font-family: 'IM Fell English', serif;
+    color: var(--bronze);
+}
+
+.landing-feature-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+}
+
+.landing-pill {
+    padding: 0.5rem 1rem;
+    background: var(--bg-dark);
+    color: var(--paper);
+    border-radius: 4px;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    border: 1px solid var(--bronze);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.landing-help-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 10px,
+        var(--bronze) 10px,
+        var(--bronze) 15px,
+        transparent 15px,
+        transparent 25px
+    );
+    background-size: 25px 3px;
+    background-repeat: repeat-x;
+}
+
+.landing-journey-section {
+    background:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.02"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /></filter><rect width="100" height="100" filter="url(%23noise)" /></svg>'),
+        linear-gradient(135deg, var(--bg-dark) 0%, var(--panel) 50%, var(--bg-dark) 100%);
+    color: var(--paper);
+    padding: 7rem 0;
+    position: relative;
+}
+
+.landing-journey-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .landing-journey-content {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 5rem;
+    }
+}
+
+.landing-journey-text {
+    order: 1;
+}
+
+.landing-journey-text h2 {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    margin-bottom: 1.125rem;
+    letter-spacing: -0.01em;
+}
+
+.landing-journey-text p {
+    font-size: 1.125rem;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+    line-height: 1.75;
+    font-family: 'Old Standard TT', serif;
+}
+
+.landing-journey-text p::first-letter {
+    font-size: 3.2em;
+    line-height: 0.85;
+    float: left;
+    margin: 0.05em 0.08em 0 0;
+    font-family: 'IM Fell English', serif;
+    color: var(--bronze);
+}
+
+.landing-journey-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    .landing-journey-buttons {
+        flex-direction: row;
+    }
+}
+
+.landing-journey-image {
+    order: 2;
+    position: relative;
+}
+
+.landing-journey-image::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    background: var(--paper);
+    z-index: -1;
+    clip-path: polygon(
+        0% 2%, 2% 0%, 4% 1%, 6% 0%, 9% 2%, 11% 1%, 14% 0%, 17% 1%,
+        20% 0%, 23% 2%, 26% 1%, 29% 0%, 32% 1%, 35% 0%, 38% 2%,
+        41% 1%, 44% 0%, 47% 1%, 50% 0%, 53% 2%, 56% 1%, 59% 0%,
+        62% 1%, 65% 0%, 68% 2%, 71% 1%, 74% 0%, 77% 1%, 80% 0%,
+        83% 2%, 86% 1%, 89% 0%, 91% 1%, 94% 0%, 96% 2%, 98% 1%, 100% 0%,
+        100% 100%, 98% 99%, 96% 98%, 94% 100%, 91% 99%, 89% 100%,
+        86% 99%, 83% 98%, 80% 100%, 77% 99%, 74% 100%, 71% 99%,
+        68% 98%, 65% 100%, 62% 99%, 59% 100%, 56% 99%, 53% 98%,
+        50% 100%, 47% 99%, 44% 100%, 41% 99%, 38% 98%, 35% 100%,
+        32% 99%, 29% 100%, 26% 99%, 23% 98%, 20% 100%, 17% 99%,
+        14% 100%, 11% 99%, 9% 98%, 6% 100%, 4% 99%, 2% 100%, 0% 98%
+    );
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.landing-journey-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    display: block;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.landing-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9375rem 2rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+    min-height: 48px;
+    width: 100%;
+    letter-spacing: 0.02em;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .landing-btn {
+        width: auto;
+    }
+}
+
+.landing-btn-primary {
+    background: var(--bronze);
+    color: var(--bg-dark);
+    box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+        0 4px 12px rgba(176, 139, 91, 0.3);
+}
+
+.landing-btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+        0 8px 20px rgba(176, 139, 91, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.landing-btn-primary:active {
+    transform: translateY(0);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.2),
+        0 2px 8px rgba(176, 139, 91, 0.2);
+}
+
+.landing-btn-outline {
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.25s ease;
+}
+
+.landing-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-style: dashed;
+    border-color: var(--bronze);
+}
+
+.landing-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 2rem);
+}
+
+/* ===== UNIFIED NAVBAR ===== */
+.unified-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(15, 14, 13, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(176, 139, 91, 0.2);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.unified-nav-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    gap: 2rem;
+}
+
+.unified-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.unified-nav-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.unified-nav-brand {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: white;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+}
+
+.unified-nav-center {
+    display: none;
+    flex: 1;
+    justify-content: center;
+}
+
+@media (min-width: 1024px) {
+    .unified-nav-center {
+        display: flex;
+    }
+}
+
+.unified-nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.unified-nav-menu a {
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: var(--transition);
+    position: relative;
+    padding: 0.5rem 0;
+    white-space: nowrap;
+}
+
+.unified-nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--bronze);
+    transition: width 0.3s ease;
+}
+
+.unified-nav-menu a:hover,
+.unified-nav-menu a.active {
+    color: var(--bronze);
+}
+
+.unified-nav-menu a:hover::after,
+.unified-nav-menu a.active::after {
+    width: 100%;
+}
+
+.unified-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.unified-profile-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bronze), var(--bronze-dark, #8a6d47));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--paper);
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid rgba(176, 139, 91, 0.3);
+    box-shadow: 0 2px 8px rgba(176, 139, 91, 0.2);
+    overflow: hidden;
+}
+
+.unified-profile-circle:hover {
+    transform: scale(1.08);
+    border-color: var(--bronze);
+    box-shadow: 0 4px 12px rgba(176, 139, 91, 0.4);
+}
+
+.unified-profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.unified-mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+    z-index: 1001;
+}
+
+@media (min-width: 1024px) {
+    .unified-mobile-toggle {
+        display: none;
+    }
+}
+
+.unified-mobile-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--bronze);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.unified-mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.unified-mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.unified-mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.unified-mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(320px, 85vw);
+    height: 100vh;
+    background: var(--panel);
+    z-index: 999;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 2rem 2rem;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.unified-mobile-menu.active {
+    right: 0;
+}
+
+.unified-mobile-menu nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.unified-mobile-menu nav a {
+    color: var(--paper);
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(176, 139, 91, 0.2);
+    transition: var(--transition);
+}
+
+.unified-mobile-menu nav a:hover,
+.unified-mobile-menu nav a.active {
+    color: var(--bronze);
+    padding-left: 0.75rem;
+}
+
+.unified-mobile-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    color: var(--paper);
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.unified-mobile-close:hover {
+    color: var(--bronze);
+    transform: rotate(90deg);
+}
+
+.unified-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.unified-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Add spacing for fixed header */
+body {
+    padding-top: 70px;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* ===== UNIFIED FOOTER ===== */
+.unified-footer {
+    background: linear-gradient(to bottom, var(--bg-dark), var(--panel));
+    color: var(--paper);
+    padding: 2rem 0 2rem;
+    margin-top: 0;
+    position: relative;
+    border-top: 1px solid rgba(176, 139, 91, 0.2);
+}
+
+.unified-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--bronze), transparent);
+    opacity: 0.5;
+}
+
+.unified-footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 2rem);
+}
+
+.unified-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    .unified-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+}
+
+.footer-column h3 {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.1rem;
+    color: var(--bronze);
+    margin-bottom: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+.footer-column p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-column ul li a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.footer-column ul li a:hover {
+    color: var(--bronze);
+    padding-left: 0.5rem;
+}
+
+.footer-social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .footer-social-links {
+        justify-content: center;
+    }
+}
+
+.footer-social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(176, 139, 91, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bronze);
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid rgba(176, 139, 91, 0.2);
+}
+
+.footer-social-link:hover {
+    background: var(--bronze);
+    color: var(--bg-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(176, 139, 91, 0.3);
+}
+
+.footer-social-link svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(176, 139, 91, 0.3), transparent);
+    margin: 2rem 0;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+}
+
+@media (max-width: 768px) {
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .footer-bottom-links {
+        justify-content: center;
+    }
+}
+
+.footer-bottom-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-bottom-links a:hover {
+    color: var(--bronze);
+}
+
+.footer-logo-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .footer-logo-brand {
+        justify-content: center;
+    }
+}
+
+.footer-logo-brand img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.footer-logo-brand span {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.2rem;
+    color: var(--bronze);
+    letter-spacing: 0.05em;
+}
+
+/* Hide old footer */
+.site-footer {
+    display: none !important;
+}
+    </style>
+</head>
+
+<body>
+    <svg class="u-visually-hidden">
+        <defs>
+            <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </symbol>
+            <symbol id="icon-book" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- UNIFIED NAVBAR -->
+    <header class="unified-header">
+        <div class="unified-nav-container">
+            <!-- Left: Logo + Brand -->
+            <div class="unified-nav-left">
+                <img src="images/logo.png" alt="GDE Logo" class="unified-nav-logo" width="40" height="40">
+                <span class="unified-nav-brand">GDE ENSAMR</span>
+            </div>
+
+            <!-- Center: Navigation Menu (Desktop) -->
+            <div class="unified-nav-center">
+                <ul class="unified-nav-menu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="catalogue2.html" class="active">Bibliothèque</a></li>
+                    <li><a href="events.html">Événements</a></li>
+                    <li><a href="podcasts.html">Podcasts</a></li>
+                    <li><a href="journal.html">Journal</a></li>
+                </ul>
+            </div>
+
+            <!-- Right: Profile Circle -->
+            <div class="unified-nav-right">
+                <div class="unified-profile-circle" title="Profile">
+                    <!-- You can replace 'GD' with user initials or add an img tag for profile picture -->
+                    <span id="userInitials">GD</span>
+                </div>
+
+                <!-- Mobile Toggle -->
+                <button class="unified-mobile-toggle" id="unifiedMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="unified-mobile-menu" id="unifiedMobileMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+        <button class="unified-mobile-close" id="unifiedMobileClose" aria-label="Fermer le menu">×</button>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="catalogue2.html" class="active">Bibliothèque</a>
+            <a href="events.html">Événements</a>
+            <a href="podcasts.html">Podcasts</a>
+            <a href="journal.html">Journal</a>
+        </nav>
+    </div>
+
+    <!-- Backdrop -->
+    <div class="unified-backdrop" id="unifiedBackdrop" aria-hidden="true"></div>
+
+    <!-- LANDING PAGE CONTENT (from old index.html) -->
+    <section class="landing-hero">
+        <div class="landing-container">
+            <div class="landing-hero-content">
+                <div class="landing-hero-text">
+                    <h1>For Book Lovers.</h1>
+                    <p class="lead">Discover, borrow and share books inside ENSAM Rabat — simple and trustworthy.</p>
+                    <p class="subtitle">Great Debaters • ENSAM Rabat</p>
+                    <div class="landing-hero-buttons">
+                        <a href="#catalogue-start" class="landing-btn landing-btn-primary">Start the journey →</a>
+                        <a href="share2.html" class="landing-btn landing-btn-outline">Dépose ton livre →</a>
+                    </div>
+                </div>
+                <div class="landing-hero-image">
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="images/image11.jpg" type="image/jpeg">
+                        <img src="images/image11.jpg" alt="Warm library with books and manuscripts" width="600" height="450" loading="eager">
+                    </picture>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="landing-help-section">
+        <div class="landing-container">
+            <div class="landing-help-content">
+                <div class="landing-phone-mock">
+                    <div class="landing-phone-frame">
+                        <img src="images/image3.png" alt="BiblioENSAMR mobile app interface" width="280" height="560" loading="lazy">
+                    </div>
+                </div>
+                <div class="landing-help-text">
+                    <h2>We're here to help.</h2>
+                    <p>Clean, readable and fast. From finding a title to asking for a loan — everything is clear and organized.</p>
+                    <div class="landing-feature-pills">
+                        <span class="landing-pill">Simple search</span>
+                        <span class="landing-pill">Clear requests</span>
+                        <span class="landing-pill">Safe with school email</span>
+                        <span class="landing-pill">Your library</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="landing-journey-section">
+        <div class="landing-container">
+            <div class="landing-journey-content">
+                <div class="landing-journey-text">
+                    <h2>Start the journey.</h2>
+                    <p>Begin with the catalogue or deposit a book — it takes a minute.</p>
+                    <div class="landing-journey-buttons">
+                        <a href="#catalogue-start" class="landing-btn landing-btn-primary">Start now →</a>
+                        <a href="share2.html" class="landing-btn landing-btn-outline">Dépose un livre →</a>
+                    </div>
+                </div>
+                <div class="landing-journey-image">
+                    <img src="images/image2.png" alt="Study scene with notebook and coffee" width="600" height="450" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END LANDING PAGE CONTENT -->
+
+    <div id="catalogue-start"></div>
+    <main class="main-content">
+        <section class="section" data-category="literature">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Littérature Classique</h2>
+                </div>
+                <div class="books-container">
+                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
+                    <div class="books-scroll" role="list" tabindex="0">
+                        <div class="book-card" role="listitem" data-title="Les Misérables Victor Hugo" data-author="Victor Hugo">
+                            <img src="images/misérable.png" alt="Couverture des Misérables" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Les Misérables</h3>
+                                <p class="book-author">Victor Hugo</p>
+                                <p class="book-price">24.90 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Notre-Dame de Paris Victor Hugo" data-author="Victor Hugo">
+                            <img src="images/paris.png" alt="Couverture de Notre-Dame de Paris" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Notre-Dame de Paris</h3>
+                                <p class="book-author">Victor Hugo</p>
+                                <p class="book-price">22.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Madame Bovary Gustave Flaubert" data-author="Gustave Flaubert">
+                            <img src="images/livre.png" alt="Couverture de Madame Bovary" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Madame Bovary</h3>
+                                <p class="book-author">Gustave Flaubert</p>
+                                <p class="book-price">19.90 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Le Père Goriot Honoré de Balzac" data-author="Honoré de Balzac">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture du Père Goriot" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Le Père Goriot</h3>
+                                <p class="book-author">Honoré de Balzac</p>
+                                <p class="book-price">21.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="L'Étranger Albert Camus" data-author="Albert Camus">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de L'Étranger" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">L'Étranger</h3>
+                                <p class="book-author">Albert Camus</p>
+                                <p class="book-price">18.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="La Peste Albert Camus" data-author="Albert Camus">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de La Peste" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">La Peste</h3>
+                                <p class="book-author">Albert Camus</p>
+                                <p class="book-price">20.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <a href="#" class="view-all-card" role="listitem">
+                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
+                                <use href="#icon-book" fill="var(--bronze)"/>
+                            </svg>
+                            <div class="view-all-text">Voir Tout</div>
+                        </a>
+                    </div>
+                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" data-category="romans">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Romans Contemporains</h2>
+                </div>
+                <div class="books-container">
+                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
+                    <div class="books-scroll" role="list" tabindex="0">
+                        <div class="book-card" role="listitem" data-title="L'Art de perdre Alice Zeniter" data-author="Alice Zeniter">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de L'Art de perdre" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">L'Art de perdre</h3>
+                                <p class="book-author">Alice Zeniter</p>
+                                <p class="book-price">23.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Vernon Subutex Virginie Despentes" data-author="Virginie Despentes">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Vernon Subutex" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Vernon Subutex</h3>
+                                <p class="book-author">Virginie Despentes</p>
+                                <p class="book-price">25.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Changer l'eau des fleurs Valérie Perrin" data-author="Valérie Perrin">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de Changer l'eau des fleurs" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Changer l'eau des fleurs</h3>
+                                <p class="book-author">Valérie Perrin</p>
+                                <p class="book-price">22.90 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="L'Anomalie Hervé Le Tellier" data-author="Hervé Le Tellier">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de L'Anomalie" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">L'Anomalie</h3>
+                                <p class="book-author">Hervé Le Tellier</p>
+                                <p class="book-price">21.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Civilizations Laurent Binet" data-author="Laurent Binet">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de Civilizations" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Civilizations</h3>
+                                <p class="book-author">Laurent Binet</p>
+                                <p class="book-price">24.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Yoga Emmanuel Carrère" data-author="Emmanuel Carrère">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Yoga" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Yoga</h3>
+                                <p class="book-author">Emmanuel Carrère</p>
+                                <p class="book-price">23.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <a href="#" class="view-all-card" role="listitem">
+                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
+                                <use href="#icon-book" fill="var(--bronze)"/>
+                            </svg>
+                            <div class="view-all-text">Voir Tout</div>
+                        </a>
+                    </div>
+                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" data-category="sciences">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Sciences & Philosophie</h2>
+                </div>
+                <div class="books-container">
+                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
+                    <div class="books-scroll" role="list" tabindex="0">
+                        <div class="book-card" role="listitem" data-title="Sapiens Yuval Noah Harari" data-author="Yuval Noah Harari">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de Sapiens" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Sapiens</h3>
+                                <p class="book-author">Yuval Noah Harari</p>
+                                <p class="book-price">26.90 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Homo Deus Yuval Noah Harari" data-author="Yuval Noah Harari">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Homo Deus" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Homo Deus</h3>
+                                <p class="book-author">Yuval Noah Harari</p>
+                                <p class="book-price">25.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Le Gène Siddhartha Mukherjee" data-author="Siddhartha Mukherjee">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture du Gène" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Le Gène</h3>
+                                <p class="book-author">Siddhartha Mukherjee</p>
+                                <p class="book-price">28.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="L'Être et le Temps Martin Heidegger" data-author="Martin Heidegger">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de L'Être et le Temps" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">L'Être et le Temps</h3>
+                                <p class="book-author">Martin Heidegger</p>
+                                <p class="book-price">32.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Critique de la raison pure Emmanuel Kant" data-author="Emmanuel Kant">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de Critique de la raison pure" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Critique de la raison pure</h3>
+                                <p class="book-author">Emmanuel Kant</p>
+                                <p class="book-price">29.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Une brève histoire du temps Stephen Hawking" data-author="Stephen Hawking">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture d'Une brève histoire du temps" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Une brève histoire du temps</h3>
+                                <p class="book-author">Stephen Hawking</p>
+                                <p class="book-price">24.90 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <a href="#" class="view-all-card" role="listitem">
+                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
+                                <use href="#icon-book" fill="var(--bronze)"/>
+                            </svg>
+                            <div class="view-all-text">Voir Tout</div>
+                        </a>
+                    </div>
+                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" data-category="histoire">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Histoire & Biographies</h2>
+                </div>
+                <div class="books-container">
+                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
+                    <div class="books-scroll" role="list" tabindex="0">
+                        <div class="book-card" role="listitem" data-title="Les Rois maudits Maurice Druon" data-author="Maurice Druon">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture des Rois maudits" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Les Rois maudits</h3>
+                                <p class="book-author">Maurice Druon</p>
+                                <p class="book-price">27.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Mémoires de guerre Charles de Gaulle" data-author="Charles de Gaulle">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Mémoires de guerre" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Mémoires de guerre</h3>
+                                <p class="book-author">Charles de Gaulle</p>
+                                <p class="book-price">31.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="L'Histoire de France Ernest Lavisse" data-author="Ernest Lavisse">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de L'Histoire de France" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">L'Histoire de France</h3>
+                                <p class="book-author">Ernest Lavisse</p>
+                                <p class="book-price">35.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Napoléon Jean Tulard" data-author="Jean Tulard">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Napoléon" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Napoléon</h3>
+                                <p class="book-author">Jean Tulard</p>
+                                <p class="book-price">26.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Le Siècle des Lumières Voltaire" data-author="Voltaire">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture du Siècle des Lumières" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Le Siècle des Lumières</h3>
+                                <p class="book-author">Voltaire</p>
+                                <p class="book-price">23.90 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Marie-Antoinette Stefan Zweig" data-author="Stefan Zweig">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de Marie-Antoinette" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Marie-Antoinette</h3>
+                                <p class="book-author">Stefan Zweig</p>
+                                <p class="book-price">22.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <a href="#" class="view-all-card" role="listitem">
+                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
+                                <use href="#icon-book" fill="var(--bronze)"/>
+                            </svg>
+                            <div class="view-all-text">Voir Tout</div>
+                        </a>
+                    </div>
+                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" data-category="premium">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">Livres Premium</h2>
+                </div>
+                <div class="books-container">
+                    <button class="scroll-nav prev" aria-label="Précédent" tabindex="0">‹</button>
+                    <div class="books-scroll" role="list" tabindex="0">
+                        <div class="book-card" role="listitem" data-title="Éditions Originales Collection" data-author="Éditions Rares">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture d'édition originale" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Éditions Originales</h3>
+                                <p class="book-author">Collection Rare</p>
+                                <p class="book-price">120.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Manuscrits Anciens Collection" data-author="Bibliothèque Nationale">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de manuscrit ancien" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Manuscrits Anciens</h3>
+                                <p class="book-author">Bibliothèque Nationale</p>
+                                <p class="book-price">89.90 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Œuvres Complètes Proust" data-author="Marcel Proust">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture des œuvres complètes de Proust" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Œuvres Complètes</h3>
+                                <p class="book-author">Marcel Proust</p>
+                                <p class="book-price">75.50 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Collection Shakespeare" data-author="William Shakespeare">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture de la collection Shakespeare" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Collection Shakespeare</h3>
+                                <p class="book-author">William Shakespeare</p>
+                                <p class="book-price">95.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Encyclopédie Diderot" data-author="Denis Diderot">
+                            <img src="https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?w=220&h=293" alt="Couverture de l'Encyclopédie de Diderot" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Encyclopédie Diderot</h3>
+                                <p class="book-author">Denis Diderot</p>
+                                <p class="book-price">150.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <div class="book-card" role="listitem" data-title="Grands Atlas Historiques" data-author="Éditions Cartographiques">
+                            <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg?w=220&h=293" alt="Couverture d'atlas historique" class="book-cover" loading="lazy" width="220" height="293">
+                            <div class="book-info">
+                                <h3 class="book-title">Grands Atlas Historiques</h3>
+                                <p class="book-author">Éditions Cartographiques</p>
+                                <p class="book-price">110.00 €</p>
+                                <button class="borrow-btn" onclick="window.location.href='form.html'">Emprunter</button>
+                            </div>
+                        </div>
+                        <a href="#" class="view-all-card" role="listitem">
+                            <svg class="view-all-icon" aria-hidden="true" width="40" height="40">
+                                <use href="#icon-book" fill="var(--bronze)"/>
+                            </svg>
+                            <div class="view-all-text">Voir Tout</div>
+                        </a>
+                    </div>
+                    <button class="scroll-nav next" aria-label="Suivant" tabindex="0">›</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- UNIFIED FOOTER -->
+    <footer class="unified-footer">
+        <div class="unified-footer-container">
+            <div class="unified-footer-grid">
+                <!-- About Column -->
+                <div class="footer-column">
+                    <div class="footer-logo-brand">
+                        <img src="images/logo.png" alt="GDE Logo" width="36" height="36">
+                        <span>GDE ENSAMR</span>
+                    </div>
+                    <p>Speak • Write • Revolutionize<br>
+                    Le club d'éloquence et de débats de l'ENSAM Rabat.</p>
+                    <div class="footer-social-links">
+                        <a href="https://www.instagram.com/gde.ensamrabat/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/gde-ensamr/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/gde.ensamrabat/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Column -->
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="catalogue2.html">Bibliothèque</a></li>
+                        <li><a href="events.html">Événements</a></li>
+                        <li><a href="podcasts.html">Podcasts</a></li>
+                        <li><a href="journal.html">Journal</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Column -->
+                <div class="footer-column">
+                    <h3>Ressources</h3>
+                    <ul>
+                        <li><a href="share2.html">Déposer un livre</a></li>
+                        <li><a href="form.html">Emprunter un livre</a></li>
+                        <li><a href="index.html#qui-nous-sommes">À propos de GDE</a></li>
+                        <li><a href="index.html#nos-valeurs">Nos valeurs</a></li>
+                        <li><a href="index.html#rejoindre">Nous rejoindre</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:gde.ensamrabat@gmail.com">gde.ensamrabat@gmail.com</a></li>
+                        <li><a href="tel:+212000000000">+212 (0)6 00 00 00 00</a></li>
+                        <li>ENSAM Rabat<br>Avenue de l'Armée Royale<br>Rabat, Maroc</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <div>© <span id="year"></span> GDE ENSAMR — Tous droits réservés.</div>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Politique de confidentialité</a>
+                    <a href="terms.html">Conditions d'utilisation</a>
+                    <a href="sitemap.html">Plan du site</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- OLD FOOTER (HIDDEN) -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">B</div>
+                <div>
+                    <strong class="brand-name">BiblioENSAMR</strong>
+                    <p class="brand-tagline">Lire, c'est multiplier ses vies.</p>
+                </div>
+            </div>
+            <nav class="footer-nav" aria-label="Liens de bas de page">
+                <a href="index.html">About GDE</a>
+                <a href="catalogue2.html">Bibliothèque</a>
+                <a href="contact.html">Contact us</a>
+                <a href="license.html">License</a>
+            </nav>
+            <p class="footer-quote">
+                Literature is a quiet laboratory for the heart where empathy is tested, refined, and kept.
+                It leaves us calibrated for kindness.
+                <span class="ornament" aria-hidden="true"></span>
+            </p>
+            <div class="footer-meta">
+                <span id="copyright">© <span id="year"></span> BiblioENSAMR — Tous droits réservés.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth-ui.js" defer></script>
+    <script>
+        (function() {
+            'use strict';
+
+            // Unified Navbar
+            const unifiedMenuToggle = document.getElementById('unifiedMenuToggle');
+            const unifiedMobileMenu = document.getElementById('unifiedMobileMenu');
+            const unifiedBackdrop = document.getElementById('unifiedBackdrop');
+            const unifiedMobileClose = document.getElementById('unifiedMobileClose');
+
+            function toggleUnifiedMenu() {
+                const isActive = unifiedMenuToggle.classList.toggle('active');
+                unifiedMobileMenu.classList.toggle('active');
+                unifiedBackdrop.classList.toggle('show');
+                document.body.classList.toggle('no-scroll');
+                unifiedMenuToggle.setAttribute('aria-expanded', isActive);
+            }
+
+            if (unifiedMenuToggle) {
+                unifiedMenuToggle.addEventListener('click', toggleUnifiedMenu);
+            }
+            if (unifiedMobileClose) {
+                unifiedMobileClose.addEventListener('click', toggleUnifiedMenu);
+            }
+            if (unifiedBackdrop) {
+                unifiedBackdrop.addEventListener('click', toggleUnifiedMenu);
+            }
+
+            if (unifiedMobileMenu) {
+                unifiedMobileMenu.querySelectorAll('a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        if (unifiedMobileMenu.classList.contains('active')) {
+                            toggleUnifiedMenu();
+                        }
+                    });
+                });
+            }
+
+            // Old search functionality (if search input exists)
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput) {
+                // Create a dummy element to prevent errors
+                const dummySearch = document.createElement('input');
+                dummySearch.id = 'searchInput';
+                dummySearch.style.display = 'none';
+                document.body.appendChild(dummySearch);
+            }
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            const bookCards = document.querySelectorAll('.book-card');
+
+            function filterBooks() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+
+                bookCards.forEach(function(card) {
+                    const title = card.dataset.title.toLowerCase();
+                    const author = card.dataset.author.toLowerCase();
+                    const isVisible = title.includes(searchTerm) || author.includes(searchTerm);
+
+                    if (isVisible) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            }
+
+            searchInput.addEventListener('input', filterBooks);
+
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    this.value = '';
+                    filterBooks();
+                    this.blur();
+                }
+            });
+
+            function initScrollNavigation() {
+                const containers = document.querySelectorAll('.books-container');
+
+                containers.forEach(function(container) {
+                    const scrollElement = container.querySelector('.books-scroll');
+                    const prevBtn = container.querySelector('.scroll-nav.prev');
+                    const nextBtn = container.querySelector('.scroll-nav.next');
+
+                    const scrollAmount = 240;
+
+                    function updateButtons() {
+                        const isAtStart = scrollElement.scrollLeft <= 0;
+                        const isAtEnd = scrollElement.scrollLeft >= scrollElement.scrollWidth - scrollElement.clientWidth - 10;
+
+                        prevBtn.disabled = isAtStart;
+                        nextBtn.disabled = isAtEnd;
+                    }
+
+                    prevBtn.addEventListener('click', function() {
+                        scrollElement.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    });
+
+                    nextBtn.addEventListener('click', function() {
+                        scrollElement.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    });
+
+                    scrollElement.addEventListener('keydown', function(e) {
+                        if (e.key === 'ArrowLeft') {
+                            e.preventDefault();
+                            scrollElement.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                        } else if (e.key === 'ArrowRight') {
+                            e.preventDefault();
+                            scrollElement.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                        }
+                    });
+
+                    scrollElement.addEventListener('scroll', updateButtons);
+
+                    updateButtons();
+
+                    window.addEventListener('resize', updateButtons);
+                });
+            }
+
+            if (window.innerWidth > 768) {
+                initScrollNavigation();
+            }
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (!prefersReducedMotion) {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.section-container').forEach(function(container) {
+                    observer.observe(container);
+                });
+            } else {
+                document.querySelectorAll('.section-container').forEach(function(container) {
+                    container.classList.add('visible');
+                });
+            }
+
+            document.querySelectorAll('.borrow-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const originalText = this.textContent;
+                    this.textContent = 'Emprunté ✓';
+                    this.style.background = 'var(--bronze)';
+                    this.style.color = 'var(--bg-dark)';
+                    this.disabled = true;
+
+                    setTimeout(function() {
+                        btn.textContent = originalText;
+                        btn.style.background = '';
+                        btn.style.color = '';
+                        btn.disabled = false;
+                    }, 2000);
+                });
+            });
+
+            setTimeout(function() {
+                const firstSection = document.querySelector('.section-container');
+                if (firstSection && !firstSection.classList.contains('visible')) {
+                    firstSection.classList.add('visible');
+                }
+            }, 100);
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    initScrollNavigation();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
